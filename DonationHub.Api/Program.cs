@@ -1,7 +1,6 @@
 using DonationHub.Api;
 using DonationHub.Application.Options;
-using DonationHub.Application.Persistence;
-using DonationHub.Domain.Entities;
+using Scalar.AspNetCore;
 using DonationHub.Infrastructure;
 using DonationHub.Infrastructure.Identity.Seeding;
 using DonationHub.Infrastructure.Seeding;
@@ -66,8 +65,13 @@ builder.Services.AddOptions<DonationOptions>()
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
-
+builder.Services.AddOpenApi();
 var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
 //seed roles on application startup
 using (var scope = app.Services.CreateScope())
 {
@@ -83,14 +87,11 @@ using (var scope = app.Services.CreateScope())
 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
 
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
