@@ -1,0 +1,20 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# Build outputs
+bin/
+obj/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# User-specific files
+*.userosscache
+*.sln.docstates
+
+ .dockerignore
+ .gitignore

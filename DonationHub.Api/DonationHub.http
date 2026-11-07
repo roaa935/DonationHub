@@ -1,0 +1,34 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+
+### Create Category
+POST http://localhost:5091/test-persistence
+###
+POST https://localhost:7265/test-persistence
+
+
+@baseUrl = https://localhost:7265/api/v1
+
+### Register
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "donor@example.com",
+  "fullName": "Test Donor",
+  "password": "DonorPass123",
+  "preferredLanguage": "en"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "donor@example.com",
+  "password": "DonorPass123"
+}
+
+### Current user
+GET {{baseUrl}}/auth/me
+Authorization: Bearer YOUR_ACCESS_TOKEN
